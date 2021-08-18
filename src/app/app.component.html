@@ -1,67 +1,41 @@
-<div *ngIf="selectedItem !== ''" class="alert" [ngClass]="{'alert-success': userAction === 2, 'alert-danger': userAction === 3}">
 
-  <div *ngIf="userAction === 2">Edit Action</div>
-  <div *ngIf="userAction === 3">Delete Action</div>
-  <div *ngIf="userAction === 1">Add Action</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-</div>
+        <li><a class="nav-link active" routerLink="/" routerLinkActive="active">Home</a></li>
+        <li><a class="nav-link active" routerLink="/product" routerLinkActive="active">Product</a></li>
+        <li><a class="nav-link active" routerLink="/customer" routerLinkActive="active">Customer</a></li>
 
-<!--
-<div *ngIf="editSelectedItem !== ''" class="alert alert-success">
-  Item {{editSelectedItem}} has been successfully updated
-</div> -->
-
-
-<h2>{{title}}</h2>
-<h3>This is my redo work</h3>
-<h4>Binding - Communication between view and the component</h4>
-
-<div class="row">
-  <div class="col-4 mb-2">
-    <input type="text" class="form-control" id="userid" name="userId" [(ngModel)]="userId">
-
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
   </div>
-</div>
+</nav>
 
 
-<button class="btn btn-primary" id="btnAction" (click)="displayname()">Display Name</button>
-
-<button class="btn btn-primary mx-3" id="btnAction" (click)="setArrayValue()">Submit </button>
-
-<!-- <h4>{{userId}}</h4> -->
+<router-outlet></router-outlet>
 
 
-<h4 *ngIf="selectedArray === 0">Array does not have any value</h4>
-<h4 *ngIf="selectedArray > 0">Array count: {{selectedArray}}</h4>
-
-<!-- <ul>
-  <li *ngFor="let item of userids">{{item}}</li>
-</ul> -->
-
-
-<div>
-  <table class="table table-bordered">
-    <tr>
-      <th>Sr#</th>
-      <th>Name of the user</th>
-      <th>Remove</th>
-    </tr>
-    <tr *ngFor = "let item of userids; index as i">
-      <td>{{i + 1}}</td>
-      <td>
-        {{item}}
-      </td>
-      <td>
-        <a class="cursor-pointer" style="cursor: pointer;" title="Edit item" (click)="editItem(i)">
-          <i class="fas fa-edit text-primary mx-2"></i>
-        </a>
-        <a class="cursor-pointer" style="cursor: pointer;" title="Remove item" (click)="removeItem(i)">
-          <i class="fas fa-times text-danger"></i>
-        </a>
-      </td>
-    </tr>
-  </table>
-
-
-
-</div>
