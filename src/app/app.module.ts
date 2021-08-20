@@ -6,12 +6,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule, RoutingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './Section1/home/home.component';
+import { ProductModalComponent } from './Section1/product-modal/product-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RoutingComponents,
     HomeComponent,
+    ProductModalComponent,
 
   ],
   imports: [

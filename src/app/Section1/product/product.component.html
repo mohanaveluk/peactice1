@@ -2,17 +2,30 @@
 
 <div *ngIf="errorMessage !== ''" class="alert alert-danger">{{errorMessage}}</div>
 
-<table class="table table-bordered table-striped w-50">
+<table class="table table-bordered table-striped w-75">
   <thead>
     <tr>
       <th>Sr#</th>
+      <th>Product Id</th>
       <th>Product Name</th>
+      <th>Product Category</th>
+      <th>Price</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let item of products; index as i">
+  <tr *ngFor="let item of productList; index as i">
     <td>{{i+1}}</td>
-    <td>{{item}}</td>
+    <td>{{item.productId}}</td>
+    <td>{{item.productName}}</td>
+    <td>{{item.category}}</td>
+    <td><div class="p-price">{{item.price !== undefined ? item.price : ''}}</div></td>
+    <td>
+      <div class="text-center">
+      <a class="pointer px-2" style="cursor: pointer;" (click)="editProduct(item)" ><i class="fas fa-edit text-center"></i></a>
+      <a class="pointer" style="cursor: pointer;"><i class="fas fa-trash text-danger"></i></a>
+    </div>
+    </td>
   </tr>
 </tbody>
 </table>
