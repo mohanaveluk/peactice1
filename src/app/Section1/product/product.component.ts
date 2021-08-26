@@ -8,6 +8,7 @@ import { ProductList, ProductListResponse } from 'src/app/services/product/produ
 import { ProductService } from 'src/app/services/product/product.service';
 import { ProductModalComponent } from '../product-modal/product-modal.component';
 import Swal from 'sweetalert2';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -17,6 +18,7 @@ selector: 'app-product',
 })
 export class ProductComponent implements OnInit {
 
+  productForm?: FormGroup;
   sub: Subscription = new Subscription();
   product$: ProductList[] = [];
   products: any = [];
@@ -32,6 +34,7 @@ export class ProductComponent implements OnInit {
    // Products adjusted as per the criteria
 
   constructor(
+    private formBuilder: FormBuilder,
     private productService: ProductService,
     private modalService: NgbModal,
     private bridgeService: BridgeService
@@ -41,6 +44,15 @@ export class ProductComponent implements OnInit {
     //this.displayProducts();
     this.getProductList();
     this.watchEvent();
+
+
+    this.productForm = this.formBuilder.group({
+      productId: [''],
+      productName: [''],
+      productCategory: [''],
+      productPrice: [0]
+    });
+
   }
 
 

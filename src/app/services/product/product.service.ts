@@ -9,7 +9,8 @@ import { ProductListResponse } from './product.model';
 @Injectable()
 export class ProductService {
 
-  producApi = 'http://localhost:3500/api/v1/product/productlist';
+  producApi = 'http://localhost:3000/api/v1/product/all';
+  updateProducApi = 'http://localhost:3000/api/v1/product/update';
 
   private productSubject = new Subject<ProductListResponse>();
   productSubject$ = this.productSubject.asObservable();
@@ -34,6 +35,10 @@ export class ProductService {
 
   getProductList(): Observable<any>{
     return this.httpClient.get<ProductListResponse>(this.producApi);
+  }
+
+  updateProduct(productInfo: any) : Observable<any>{
+    return this.httpClient.post<object>(this.updateProducApi, productInfo);
   }
 
   private handleError(err: any): Observable<never> {

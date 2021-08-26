@@ -7,29 +7,29 @@
 
 <div class="modal-body">
 
-  <div class="row">
+  <div class="row" [formGroup]="productForm">
     <div class="mb-3">
-      <label for="txtProductName" class="form-label">Product Name</label>
-      <input type="text" class="form-control" id="txtProductName" [(ngModel)]="txtProductName" placeholder="Product Name">
+      <label for="txtProductName" class="form-label"
+      [ngClass]="{'label-error': productForm && (productForm.controls.productName.invalid) && (productForm.controls.productName.dirty || productForm.controls.productName.touched) }">Product Name</label>
+      <input type="text" class="form-control" id="txtProductName" formControlName="productName" placeholder="Product Name"
+      [ngClass]="{'input-element-error': productForm && (productForm.controls.productName.invalid) && (productForm.controls.productName.dirty || productForm.controls.productName.touched) }">
     </div>
 
     <div class="mb-3">
       <label for="txtProductCategory" class="form-label">Product Category</label>
-      <input type="text" class="form-control" id="txtProductCategory" [(ngModel)]="txtProductCategory" placeholder="Product Category">
+      <input type="text" class="form-control" id="txtProductCategory" formControlName="productCategory" placeholder="Product Category">
     </div>
 
     <div class="mb-3">
       <label for="price" class="form-label">Price</label>
-      <input type="number" class="form-control" id="price" [(ngModel)]="txtProductPrice" placeholder="Price">
+      <input type="number" class="form-control" id="price" formControlName="productPrice" placeholder="Price">
     </div>
-
-
   </div>
 
 </div>
 
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="saveProduct()">Submit</button>
+  <button type="button" class="btn btn-primary" (click)="updateProductByForm()" [ngClass]="{'disabled': productForm.pristine || productForm.invalid}">Submit</button>
   <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
 </div>
 
