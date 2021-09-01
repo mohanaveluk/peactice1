@@ -114,11 +114,12 @@ export class ProductComponent implements OnInit {
 
       var selectedItem = this.productList.find(item => item.productId === this.updatedProduct.productId);
 
-      if(selectedItem!== undefined){
-        selectedItem.category = this.updatedProduct.category;
-        selectedItem.productName = this.updatedProduct.productName;
-        selectedItem.price = this.updatedProduct.price;
-      }
+      // if(selectedItem!== undefined){
+      //   selectedItem.category = this.updatedProduct.category;
+      //   selectedItem.productName = this.updatedProduct.productName;
+      //   selectedItem.price = this.updatedProduct.price;
+      // }
+      this.getProductList();
     });
   }
 

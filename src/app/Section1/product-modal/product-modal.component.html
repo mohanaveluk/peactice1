@@ -17,7 +17,10 @@
 
     <div class="mb-3">
       <label for="txtProductCategory" class="form-label">Product Category</label>
-      <input type="text" class="form-control" id="txtProductCategory" formControlName="productCategory" placeholder="Product Category">
+      <!-- <input type="text" class="form-control" id="txtProductCategory" formControlName="productCategory" placeholder="Product Category"> -->
+      <select for="txtProductCategory" class="form-select form-control" formControlName="productCategory">
+        <option *ngFor="let cat of categoryList" value="{{cat.id}}">{{cat.category_name}}</option>
+      </select>
     </div>
 
     <div class="mb-3">

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BridgeService } from 'src/app/services/bridge.service';
-import { ProductList, ProductUpdateResponse } from 'src/app/services/product/product.model';
+import { CategoryList, CategoryListResponse, ProductList, ProductUpdateResponse } from 'src/app/services/product/product.model';
 import { ProductService } from 'src/app/services/product/product.service';
 import Swal from 'sweetalert2';
 import 'sweetalert2/src/sweetalert2.scss'
@@ -20,6 +20,9 @@ export class ProductModalComponent implements OnInit {
 
   productUpdateResponse: ProductUpdateResponse;
 
+  categoryListResponse: CategoryListResponse;
+  categoryList: CategoryList[];
+
   txtProductName?: string = "";
   txtProductCategory?: string = "";
   txtProductPrice?: number = 0;
@@ -34,6 +37,7 @@ export class ProductModalComponent implements OnInit {
 
   ) { }
 
+  //https://medium.com/ngx/3-ways-to-implement-conditional-validation-of-reactive-forms-c59ed6fc3325
   ngOnInit(): void {
     console.log(`Product info - ${JSON.stringify(this.productInfo)}`);
     //this.txtProductName = this.productInfo.productName;
@@ -41,6 +45,7 @@ export class ProductModalComponent implements OnInit {
     //this.txtProductPrice = this.productInfo.price;
 
     this.initialiseForm();
+    this.loadCategory();
 
   }
 
@@ -60,6 +65,25 @@ export class ProductModalComponent implements OnInit {
       showCancelButton: false, confirmButtonText: 'Ok'
     });
   }
+
+  loadCategory(){
+
+    this.categoryList = [];
+
+    var categoryResponse = this.productService.getCategory(0).subscribe(response => {
+      this.categoryListResponse = response;
+      if(this.categoryListResponse.status === 'true'){
+        this.categoryList = this.categoryListResponse.result !== undefined ? this.categoryListResponse.result: [];
+      }
+
+    },
+    (err: HttpErrorResponse) => {
+
+    });
+  }
+
+
+
 
   updateProductByForm(){
     console.log("Valid status: ", this.productForm.valid);

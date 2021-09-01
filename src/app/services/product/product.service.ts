@@ -4,13 +4,14 @@ import { stringify } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap, map, switchMap, filter, shareReplay, scan } from 'rxjs/operators';
-import { ProductListResponse } from './product.model';
+import { CategoryListResponse, ProductListResponse } from './product.model';
 
 @Injectable()
 export class ProductService {
 
   producApi = 'http://localhost:3000/api/v1/product/all';
   updateProducApi = 'http://localhost:3000/api/v1/product/update';
+  categoryApi = 'http://localhost:3000/api/v1/product/category';
 
   private productSubject = new Subject<ProductListResponse>();
   productSubject$ = this.productSubject.asObservable();
@@ -35,6 +36,10 @@ export class ProductService {
 
   getProductList(): Observable<any>{
     return this.httpClient.get<ProductListResponse>(this.producApi);
+  }
+
+  getCategory(categoryId: number): Observable<any>{
+    return this.httpClient.get<CategoryListResponse>(`${this.categoryApi}/${categoryId}`);
   }
 
   updateProduct(productInfo: any) : Observable<any>{
