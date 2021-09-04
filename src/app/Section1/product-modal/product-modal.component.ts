@@ -29,13 +29,17 @@ export class ProductModalComponent implements OnInit {
 
   productForm: FormGroup ;
 
+  updateMode = "Add";
+
   constructor(
     private formBuilder: FormBuilder,
     public modal: NgbActiveModal,
     private productService: ProductService,
     private bridgeService: BridgeService,
 
-  ) { }
+  ) {
+
+  }
 
   //https://medium.com/ngx/3-ways-to-implement-conditional-validation-of-reactive-forms-c59ed6fc3325
   ngOnInit(): void {
@@ -46,6 +50,7 @@ export class ProductModalComponent implements OnInit {
 
     this.initialiseForm();
     this.loadCategory();
+    this.updateMode = this.productInfo?.productId === null || this.productInfo?.productId === undefined ? "Add Product" : "Update";
 
   }
 
@@ -78,7 +83,7 @@ export class ProductModalComponent implements OnInit {
 
     },
     (err: HttpErrorResponse) => {
-
+      console.log(err);
     });
   }
 
@@ -91,7 +96,7 @@ export class ProductModalComponent implements OnInit {
     console.log(this.productForm.value);
     var formValue = this.productForm.value;
 
-
+    if(this.productInfo.productId === null || this.productInfo.productId === undefined) {this.productInfo.productId = 0;}
     this.productInfo.prodcutDescription = '';
     this.productInfo.productName = this.productForm.value.productName;
     this.productInfo.category = formValue.productCategory;
@@ -136,15 +141,15 @@ export class ProductModalComponent implements OnInit {
       this.productForm = this.formBuilder.group({
         productId: [this.productInfo.productId],
         productName: [this.productInfo.productName, [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
-        productCategory: [this.productInfo.category, [Validators.required]],
+        productCategory: [this.productInfo.category === undefined ? '' : this.productInfo.category, [Validators.required]],
         productPrice: [this.productInfo.price]
       });
     }
     else {
       this.productForm = this.formBuilder.group({
         productId: [''],
-        productName: [''],
-        productCategory: [''],
+        productName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(100)]],
+        productCategory: ['', [Validators.required]],
         productPrice: [0]
       });
     }

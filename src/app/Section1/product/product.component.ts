@@ -101,6 +101,18 @@ export class ProductComponent implements OnInit {
 
   }
 
+  addProduct(itemObject: ProductList){
+    var modalOptions = {
+      centered: true,
+      size: 'lg',
+      scrollable: true,
+      ariaLabelledBy: 'modal-basic-title'
+    };
+    var modalRef = this.modalService.open(ProductModalComponent, modalOptions);
+
+    //modalRef.componentInstance.productInfo = {productId: 0};
+  }
+
   updatedProduct: ProductList = {};
   watchEvent(){
     this.bridgeService.receiveData().subscribe(response => {

@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Update {{this.productInfo?.productName}}</h4>
+  <h4 class="modal-title"> {{updateMode}} {{this.productInfo?.productName}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -19,6 +19,7 @@
       <label for="txtProductCategory" class="form-label">Product Category</label>
       <!-- <input type="text" class="form-control" id="txtProductCategory" formControlName="productCategory" placeholder="Product Category"> -->
       <select for="txtProductCategory" class="form-select form-control" formControlName="productCategory">
+          <option selected value="">Select Category</option>
         <option *ngFor="let cat of categoryList" value="{{cat.id}}">{{cat.category_name}}</option>
       </select>
     </div>
