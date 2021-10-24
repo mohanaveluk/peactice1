@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,10 @@ export class AppComponent {
   editSelectedItemTemp: string = '';
 
   userAction: number = 0;
+
+  constructor(
+    private router: Router
+  ){}
 
   displayname(){
     this.userId = "90";
@@ -68,5 +73,9 @@ export class AppComponent {
 
   }
 
+  logout(){
+    sessionStorage.removeItem("appToken");
+    this.router.navigate(['/login']);
+  }
 
 }

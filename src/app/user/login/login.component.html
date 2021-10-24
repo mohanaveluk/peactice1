@@ -1,0 +1,51 @@
+<div class="mt-5 w-50 mx-auto">
+  <div class="card text-center" style="width: 28rem;">
+    <div class="card-header">Login</div>
+    <div class="card-body">
+
+      <div *ngIf="isLoginError" class="alert alert-danger" role="alert">
+        <div class="row">
+          <div class="col-1 alert-icon-col align-self-center">
+            <span class="fa fa-info-circle fa-fw"></span>
+          </div>
+          <div class="col">
+            {{loginErrorMessage}}
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="!isLoginError && loginSuccessMessage != ''" class="alert alert-success" role="alert">
+        <div class="row">
+          <div class="col-1 alert-icon-col align-self-center">
+            <span class="fa fa-info-circle fa-fw"></span>
+          </div>
+          <div class="col">
+            {{loginSuccessMessage}}
+          </div>
+        </div>
+      </div>
+
+      <div class="row" [formGroup]="loginForm">
+
+        <div class="mb-3">
+          <label for="txtUserName" class="form-label"
+          [ngClass]="{'label-error': loginForm && (loginForm.controls.userName.invalid) && (loginForm.controls.userName.dirty || loginForm.controls.userName.touched) }">Username</label>
+          <input type="text" class="form-control" id="txtUserName" formControlName="userName" placeholder="User Name"
+          [ngClass]="{'input-element-error': loginForm && (loginForm.controls.userName.invalid) && (loginForm.controls.userName.dirty || loginForm.controls.userName.touched) }">
+        </div>
+
+        <div class="mb-3">
+          <label for="txtUserPsasword" class="form-label"
+          [ngClass]="{'label-error': loginForm && (loginForm.controls.userPassword.invalid) && (loginForm.controls.userPassword.dirty || loginForm.controls.userPassword.touched) }">UserPassword</label>
+          <input type="password" class="form-control" id="txtUserPsasword" formControlName="userPassword" placeholder="User Password"
+          [ngClass]="{'input-element-error': loginForm && (loginForm.controls.userPassword.invalid) && (loginForm.controls.userPassword.dirty || loginForm.controls.userPassword.touched) }">
+        </div>
+      </div>
+
+      <h5 class="card-title"></h5>
+      <p class="card-text">
+        </p>
+      <button (click)="verifyUser()"  class="btn btn-primary">Login</button>
+    </div>
+  </div>
+</div>
